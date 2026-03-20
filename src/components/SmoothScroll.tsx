@@ -11,6 +11,9 @@ export default function SmoothScroll() {
       touchMultiplier: 2,
     });
 
+    // Expose for programmatic scrollTo (e.g. nav links)
+    (window as unknown as Record<string, unknown>).__lenis = lenis;
+
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -20,6 +23,7 @@ export default function SmoothScroll() {
 
     return () => {
       lenis.destroy();
+      delete (window as unknown as Record<string, unknown>).__lenis;
     };
   }, []);
 

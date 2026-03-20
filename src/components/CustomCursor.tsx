@@ -15,6 +15,8 @@ export default function CustomCursor() {
 
     if (!hasFinePointer) return;
 
+    document.body.classList.add("custom-cursor-active");
+
     const onMouseMove = (e: MouseEvent) => {
       pos.current = { x: e.clientX, y: e.clientY };
     };
@@ -56,6 +58,7 @@ export default function CustomCursor() {
     animFrame = requestAnimationFrame(animate);
 
     return () => {
+      document.body.classList.remove("custom-cursor-active");
       window.removeEventListener("mousemove", onMouseMove);
       cancelAnimationFrame(animFrame);
       interactiveElements.forEach((el) => {

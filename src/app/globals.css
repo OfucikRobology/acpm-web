@@ -41,9 +41,9 @@ body {
 
 /* Hide default cursor on desktop when custom cursor is active */
 @media (pointer: fine) {
-  *,
-  *::before,
-  *::after {
+  body.custom-cursor-active *,
+  body.custom-cursor-active *::before,
+  body.custom-cursor-active *::after {
     cursor: none !important;
   }
 }
@@ -163,8 +163,7 @@ html.lenis body {
 }
 
 .card-hover:hover {
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 20px 60px -15px rgba(0, 68, 137, 0.15);
+  transform: translateY(-4px);
 }
 
 /* Nav link underline animation */

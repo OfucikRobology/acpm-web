@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Menu, X } from "lucide-react";
 
 const navItems = [
@@ -14,6 +14,17 @@ const navItems = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (!href.startsWith("#")) return;
+    e.preventDefault();
+    const lenis = (window as unknown as Record<string, unknown>).__lenis as { scrollTo: (target: string, opts?: { offset?: number }) => void } | undefined;
+    if (lenis) {
+      lenis.scrollTo(href, { offset: -80 });
+    } else {
+      document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,6 +63,7 @@ export default function Navbar() {
               <a
                 key={item.href}
                 href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
                 className="nav-link text-sm font-medium text-[var(--color-text)] tracking-wide uppercase"
                 style={{ fontFamily: "var(--font-body)" }}
               >
@@ -89,7 +101,10 @@ export default function Navbar() {
               key={item.href}
               href={item.href}
               className="text-base font-medium text-[var(--color-text)] uppercase tracking-wide"
-              onClick={() => setIsOpen(false)}
+              onClick={(e) => {
+                handleNavClick(e, item.href);
+                setIsOpen(false);
+              }}
             >
               {item.label}
             </a>
