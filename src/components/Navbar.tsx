@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
+import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const navItems = [
@@ -13,17 +12,10 @@ const navItems = [
 ];
 
 export default function Navbar() {
-  const navRef = useRef<HTMLElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    gsap.fromTo(
-      navRef.current,
-      { y: -100, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", delay: 0.4 }
-    );
-
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
@@ -33,18 +25,17 @@ export default function Navbar() {
 
   return (
     <nav
-      ref={navRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
           ? "bg-[var(--color-surface)]/90 backdrop-blur-md shadow-[0_1px_0_var(--color-border)]"
           : "bg-transparent"
       }`}
-      style={{ opacity: 0 }}
+      style={{ animation: "navSlideIn 0.6s ease-out 0.4s both" }}
     >
       <div className="mx-auto max-w-[1400px] px-6 md:px-12 lg:px-20">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3 group">
+          <a href="/" className="flex items-center gap-3 group">
             <span
               className="heading-display text-[var(--color-primary)] text-2xl font-bold tracking-tight"
             >
@@ -68,10 +59,10 @@ export default function Navbar() {
               </a>
             ))}
             <a
-              href="#clenstvi"
+              href="/login"
               className="ml-4 px-6 py-2.5 text-sm font-semibold tracking-wide uppercase border border-[var(--color-primary)] text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300"
             >
-              Staňte se členem
+              Vstup pro členy
             </a>
           </div>
 
@@ -104,11 +95,11 @@ export default function Navbar() {
             </a>
           ))}
           <a
-            href="#clenstvi"
+            href="/login"
             className="mt-2 px-6 py-3 text-sm font-semibold tracking-wide uppercase border border-[var(--color-primary)] text-[var(--color-primary)] text-center hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300"
             onClick={() => setIsOpen(false)}
           >
-            Staňte se členem
+            Vstup pro členy
           </a>
         </div>
       </div>

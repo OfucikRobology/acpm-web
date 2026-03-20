@@ -17,56 +17,48 @@ const benefits = [
     icon: Scale,
     title: "Právní poradenství",
     description: "Bezplatné právní poradenství ve spolupráci s D.A.S. pojišťovnou pro všechny členy.",
-    span: "col-span-1",
   },
   {
     icon: Globe,
     title: "Mezinárodní síť BIPAR",
     description:
       "Exkluzivní informace z EU, navazování kontaktů se zahraničními makléři a asociacemi.",
-    span: "col-span-1 sm:col-span-2 lg:col-span-1",
   },
   {
     icon: GraduationCap,
     title: "Vzdělávání & Semináře",
     description:
       "Odborné semináře a webináře zdarma. Doškolování dle vyhlášky ČNB, přístup do Akademie ČAP.",
-    span: "col-span-1",
   },
   {
     icon: Trophy,
     title: "Pojišťovna roku",
     description:
       "Prestižní anketa pojišťovacích makléřů — volný vstup na Makléřské odpoledne a galavečer.",
-    span: "col-span-1 lg:col-span-2",
   },
   {
     icon: Users,
     title: "Networking s vedením pojišťoven",
     description:
       "Pravidelné kontakty s vedením pojišťoven a Českou asociací pojišťoven.",
-    span: "col-span-1",
   },
   {
     icon: BookOpen,
     title: "Výzkumy IPSOS",
     description:
       "Podrobné závěry z výzkumů o vnímání makléřské profese — exkluzivně pro členy.",
-    span: "col-span-1",
   },
   {
     icon: Handshake,
     title: "Interakce s regulátory",
     description:
       "Přímá komunikace s představiteli ČNB a Ministerstva financí ČR.",
-    span: "col-span-1",
   },
   {
     icon: BarChart3,
     title: "Konkurenční výhoda",
     description:
       "Členství v prestižní organizaci jako diferenciátor. Zviditelnění v rámci PR aktivit AČPM.",
-    span: "col-span-1",
   },
 ];
 
@@ -111,7 +103,7 @@ export default function BenefitsSection() {
           {benefits.map((benefit, index) => (
             <ScrollReveal key={index} delay={index * 0.06}>
               <div
-                className={`card-hover group relative p-8 bg-white/[0.04] backdrop-blur-sm border border-white/[0.06] hover:border-[var(--color-accent)]/30 hover:bg-white/[0.07] transition-all duration-500 ${benefit.span}`}
+                className="card-hover group relative p-8 h-full bg-white/[0.04] backdrop-blur-sm border border-white/[0.06] hover:border-[var(--color-accent)]/30 hover:bg-white/[0.07] transition-all duration-500"
               >
                 <benefit.icon
                   className="text-[var(--color-accent)] mb-5 transition-transform duration-300 group-hover:scale-110"

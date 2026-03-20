@@ -1,18 +1,19 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const pos = useRef({ x: 0, y: 0 });
   const ringPos = useRef({ x: 0, y: 0 });
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
-    // Only show custom cursor on desktop
-    if (typeof window !== "undefined" && window.matchMedia("(pointer: fine)").matches === false) {
-      return;
-    }
+    const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
+    setIsDesktop(hasFinePointer);
+
+    if (!hasFinePointer) return;
 
     const onMouseMove = (e: MouseEvent) => {
       pos.current = { x: e.clientX, y: e.clientY };
@@ -64,15 +65,12 @@ export default function CustomCursor() {
     };
   }, []);
 
-  // Don't render on touch devices
-  if (typeof window !== "undefined" && !window.matchMedia("(pointer: fine)").matches) {
-    return null;
-  }
+  if (!isDesktop) return null;
 
   return (
     <>
-      <div ref={dotRef} className="cursor-dot hidden md:block" />
-      <div ref={ringRef} className="cursor-ring hidden md:block" />
+      <div ref={dotRef} className="cursor-dot" />
+      <div ref={ringRef} className="cursor-ring" />
     </>
   );
 }
