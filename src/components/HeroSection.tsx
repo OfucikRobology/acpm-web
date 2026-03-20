@@ -55,7 +55,7 @@ export default function HeroSection() {
     };
   }, [handleMouseMove]);
 
-  const headlineWords = "Váš spolehlivý partner v pojištění".split(" ");
+  const headlineWords = "Společně hájíme zájmy. Společně posouváme profesi.".split(" ");
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden hero-glow">
